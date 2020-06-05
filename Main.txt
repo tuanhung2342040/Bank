@@ -1,0 +1,13 @@
+public class Main {
+
+    public static void main(String[] args) {
+	   Customer customer = new Customer();
+	   customer = customer.Deposit.toString();
+	   Withdraw.toString();
+	   customer.deposit("1000.00", 2020-02-30, "Hung1ar");
+	   customer.withdraw("500.00",2020-03-20, "Hung1ar");
+	   System.out.println(customer.toString());
+
+
+    }
+}

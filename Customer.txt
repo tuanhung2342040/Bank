@@ -1,0 +1,83 @@
+import javax.security.sasl.SaslClient;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Customer {
+    private int accountNumber;
+    private ArrayList<Deposit> deposits;
+    private ArrayList<Withdraw> withdraws;
+    private double checkBalance;
+    private double savingBalance;
+    private double savingRate;
+    private String name;
+    public static final String CHECKING = "Checking";
+    public static final String SAVING = "Saving";
+    private final int OVERDRAFT = -100;
+    private double finalBalance;
+
+    Customer(){
+        //create default constructor
+        this.name = "No name";
+        this.accountNumber = 0;
+
+    }
+    Customer(String name, int accountNumber, double checkDeposit, double savingDeposit){
+        //constructor code here
+        this.name = name;
+        this.accountNumber = accountNumber;
+    }
+
+    public double deposit(double amt, Date  date, String account){
+        if (amt < 0){
+            System.out.println("Not a valid deposit");
+        }
+        if (amt > 0){
+            if (account == CHECKING){
+                finalBalance = checkBalance + amt;
+            }
+            if (account == SAVING){
+                finalBalance = savingBalance + amt;
+            }
+            else{
+                System.out.println("This account doesn't exist");
+            }
+        }
+        return 0;
+    }
+    public double withdraw(double amt, Date date, String account){
+        if(amt > finalBalance + 100){
+            System.out.println("Overdraft");
+        }
+        if(account == CHECKING){
+            finalBalance = checkBalance - amt;
+        }
+        if(account == SAVING){
+            finalBalance = savingBalance - amt;
+        }
+        else{
+            System.out.println("this account doesn't exist");
+        }
+        return 0;
+    }
+    private boolean checkOverdraft(double amt, String account){
+        if (finalBalance <= OVERDRAFT){
+            System.out.println("You are gone ove the balance");
+            return true;
+        }
+
+        return false;
+    }
+    //do not modify
+    public void displayDeposits(){
+        for(Deposit d : deposits){
+            System.out.println(d);
+        }
+    }
+    //do not modify
+    public void displayWithdraws(){
+        for(Withdraw w : withdraws){
+            System.out.println(w);
+        }
+    }
+
+}
